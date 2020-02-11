@@ -1,9 +1,8 @@
 {
   "name": "GJNewsDataSafe",
   "version": "0.1.0",
-  "summary": "A short description of GJNewsDataSafe.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/wuweiwei/GJNewsDataSafe",
+  "summary": "用于校验服务器返回数据的安全性",
+  "homepage": "https://github.com/wuweiwei0210/GJNewsDataSafe.git",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +11,7 @@
     "wuweiwei": "846591806@qq.com"
   },
   "source": {
-    "git": "https://github.com/wuweiwei/GJNewsDataSafe.git",
+    "git": "https://github.com/wuweiwei0210/GJNewsDataSafe.git",
     "tag": "0.1.0"
   },
   "platforms": {

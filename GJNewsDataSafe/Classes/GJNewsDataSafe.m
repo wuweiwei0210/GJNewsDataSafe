@@ -56,4 +56,88 @@
     }
 }
 
++ (id)objectAtIndexSafe:(NSInteger)index array:(NSArray *)array {
+    if (!array) {
+        return nil;
+    }
+    
+    if (array.count == 0) {
+        return nil;
+    }
+    
+    if (index < array.count) {
+        return [array objectAtIndex:index];
+    }
+    return nil;
+}
+
++ (void)addObjectSafe:(id)anObject array:(NSMutableArray *)array {
+    if (!array) {
+        return;
+    }
+
+    if  (anObject != nil && [anObject isKindOfClass:[NSNull class]] == NO) {
+        [array addObject:anObject];
+    } else {
+        return;
+    }
+}
+
++ (void)insertObjectSafe:(id)anObject atIndex:(NSUInteger)index array:(NSMutableArray *)array {
+    if (!array) {
+        return;
+    }
+    
+    if  (index <= array.count && anObject != nil && [anObject isKindOfClass:[NSNull class]] == NO)  {
+        [array insertObject:anObject atIndex:index];
+    } else {
+        return;
+    }
+}
+
++ (void)removeObjectAtIndexSafe:(NSUInteger)index array:(NSMutableArray *)array {
+    if (!array) {
+        return;
+    }
+    
+    if  (index < array.count)  {
+        [array removeObjectAtIndex:index];
+    } else {
+        return;
+    }
+}
+
++ (void)replaceObjectAtIndexSafe:(NSUInteger)index withObject:(id)anObject array:(NSMutableArray *)array {
+    if  (index < array.count && anObject != nil && [anObject isKindOfClass:[NSNull class]] == NO)  {
+        [array replaceObjectAtIndex:index withObject:anObject];
+    } else {
+        return;
+    }
+}
+
++ (void)setValueSafe:(id)object forKey:(NSString *)key dict:(NSMutableDictionary *)dict {
+    if (key && [key isKindOfClass:[NSString class]]) {
+        [dict setValue:object forKey:key];
+    } else {
+        return;
+    }
+}
+
++ (id)valueForKeySafe:(NSString*)Key dict:(NSDictionary *)dict {
+    id object = nil;
+    
+    // 检查是否字典对象
+    if (![dict isMemberOfClass:[NSDictionary class]]) {
+        return object;
+    }
+    
+    // 保证key必须为字符串
+    if (Key && [Key isKindOfClass:[NSString class]]) {
+        object = [dict valueForKey:Key];
+    }
+    
+    return object;
+}
+
+
 @end

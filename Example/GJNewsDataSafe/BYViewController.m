@@ -19,11 +19,9 @@
 {
     [super viewDidLoad];
     
-    [self test1];
-    [self test2];
 }
 
-- (void)test1 {
+- (void)checkReponseData1 {
     NSArray *json =@[@{@"id": @1,
                        @"imageId": @"13",
                        @"time":  @"2016.12.11",
@@ -63,7 +61,7 @@
     }
 }
 
-- (void)test2 {
+- (void)checkReponseData2 {
     NSArray *json =@[@{@"id": @1,
                        @"imageId": @"13",
                        @"time":  @"2016.12.11",
