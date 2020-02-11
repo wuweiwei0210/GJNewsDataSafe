@@ -18,9 +18,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
+    [self test1];
+    [self test2];
 }
-
 
 - (void)test1 {
     NSArray *json =@[@{@"id": @1,
