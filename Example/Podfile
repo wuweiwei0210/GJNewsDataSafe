@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'GJNewsDataSafe_Example' do
+  pod 'GJNewsDataSafe', :path => '../'
+
+  target 'GJNewsDataSafe_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

@@ -1,0 +1,16 @@
+PODS:
+  - GJNewsDataSafe (0.1.0)
+
+DEPENDENCIES:
+  - GJNewsDataSafe (from `../`)
+
+EXTERNAL SOURCES:
+  GJNewsDataSafe:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  GJNewsDataSafe: c18be840d088d75d9e52c008355488617b1eb599
+
+PODFILE CHECKSUM: 43b94c3b00657361776075faab8eefc475830585
+
+COCOAPODS: 1.8.4
