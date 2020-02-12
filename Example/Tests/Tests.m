@@ -131,6 +131,84 @@
     XCTAssertTrue(result);
 }
 
+- (void)testGJNewsResponseData {
+    NSDictionary *json = @{@"msg": @"success",
+                           @"error": @"noError",
+                           @"data": @{@"typeCode": @"9201",
+                                      @"pictureUrl": @"https://12333333333333",
+                                      @"responseListFirst": @[@{@"name": @"张三",
+                                                                @"sex": @"男",
+                                                                @"number":@1
+                                                                },
+                                                              @{@"name": @"张三",
+                                                                @"sex": @"男",
+                                                                @"number": @1
+                                                                }
+                                                             ]
+                                    }
+                          };
+    
+    
+    // 指定需要校验的数据格式
+    NSDictionary *validator = @{@"msg": [NSString class],
+                                @"data": @{@"responseListFirst" : @[@{}]}
+                               };
+    // 校验后台返回的数据结构
+    BOOL result = [GJNewsDataSafe validateJSON:json withValidator:validator];
+    
+    // 解析后台数据
+    if (result) {
+        NSString *msg = [json valueForKey:@"msg"];
+        if ([msg isEqualToString:@"success"]) {
+            NSDictionary *data = json[@"data"];
+            NSArray *responseListFirst = data[@"responseListFirst"];
+            
+            [responseListFirst enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                // 创建数组模型，不用再校验obj是否是字典类型了，上面已经校验好了
+            }];
+        }
+    } else {
+        NSLog(@"后台接口返回的数结构有误！！！！");
+    }
+    
+    XCTAssertTrue(result);
+}
+
+- (void)testGJNewsResponseDataFail {
+    NSDictionary *json = @{@"msg": @"success",
+                           @"error": @"noError",
+                           @"data": @{@"typeCode": @"9201",
+                                      @"pictureUrl": @"https://12333333333333",
+                                      @"responseListFirst": @[@"1", @"1"]
+                                    }
+                          };
+    
+    
+    // 指定需要校验的数据格式
+    NSDictionary *validator = @{@"msg": [NSString class],
+                                @"data": @{@"responseListFirst" : @[@{}]}
+                               };
+    // 校验后台返回的数据结构
+    BOOL result = [GJNewsDataSafe validateJSON:json withValidator:validator];
+    
+    // 解析后台数据
+    if (result) {
+        NSString *msg = [json valueForKey:@"msg"];
+        if ([msg isEqualToString:@"success"]) {
+            NSDictionary *data = json[@"data"];
+            NSArray *responseListFirst = data[@"responseListFirst"];
+            
+            [responseListFirst enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                // 创建数组模型，不用再校验obj是否是字典类型了，上面已经校验好了
+            }];
+        }
+    } else {
+        NSLog(@"后台接口返回的数结构有误！！！！");
+    }
+    
+    XCTAssertTrue(result);
+}
+
 - (void)testGetObjectFromArraySafe {
     NSArray *array = @[@"1", @"1"];
     

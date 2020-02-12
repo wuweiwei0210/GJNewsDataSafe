@@ -56,6 +56,15 @@
     }
 }
 
++ (id)checkObjectAtIndex:(NSInteger)index array:(NSArray *)array valueClass:(Class)valueClass {
+    id object = [self objectAtIndexSafe:index array:array];
+    if (object && [object isKindOfClass:valueClass]) {
+        return object;
+    } else {
+        return nil;
+    }
+}
+
 + (id)objectAtIndexSafe:(NSInteger)index array:(NSArray *)array {
     if (!array) {
         return nil;
@@ -115,15 +124,7 @@
     }
 }
 
-+ (void)setValueSafe:(id)object forKey:(NSString *)key dict:(NSMutableDictionary *)dict {
-    if (key && [key isKindOfClass:[NSString class]]) {
-        [dict setValue:object forKey:key];
-    } else {
-        return;
-    }
-}
-
-+ (id)valueForKeySafe:(NSString*)Key dict:(NSDictionary *)dict {
++ (id)valueForKeySafe:(NSString *)key dict:(NSDictionary *)dict {
     id object = nil;
     
     // 检查是否字典对象
@@ -132,12 +133,37 @@
     }
     
     // 保证key必须为字符串
-    if (Key && [Key isKindOfClass:[NSString class]]) {
-        object = [dict valueForKey:Key];
+    if (key && [key isKindOfClass:[NSString class]]) {
+        object = [dict valueForKey:key];
     }
     
     return object;
 }
 
++ (void)setValueSafe:(id)object forKey:(NSString *)key dict:(NSMutableDictionary *)dict {
+    if (key && [key isKindOfClass:[NSString class]]) {
+        [dict setValue:object forKey:key];
+    } else {
+        return;
+    }
+}
+
++ (id)valueForKeySafe:(NSString *)key dict:(NSDictionary *)dict valueClass:(Class)valueClass {
+    id object = [self valueForKeySafe:key dict:dict];
+    if (object && [object isKindOfClass:valueClass]) {
+        return object;
+    } else {
+        return nil;
+    }
+}
+
++ (NSString *)getStringValueFromDictSafe:(NSDictionary *)dict key:(NSString *)key {
+    id object = [self valueForKeySafe:key dict:dict valueClass:[NSString class]];
+    if (object) {
+        return object;
+    } else {
+        return @"";
+    }
+}
 
 @end
