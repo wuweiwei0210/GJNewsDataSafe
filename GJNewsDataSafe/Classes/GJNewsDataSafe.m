@@ -128,7 +128,7 @@
     id object = nil;
     
     // 检查是否字典对象
-    if (![dict isMemberOfClass:[NSDictionary class]]) {
+    if (![dict isKindOfClass:[NSDictionary class]]) {
         return object;
     }
     
@@ -141,7 +141,7 @@
 }
 
 + (void)setValueSafe:(id)object forKey:(NSString *)key dict:(NSMutableDictionary *)dict {
-    if (key && [key isKindOfClass:[NSString class]]) {
+    if (key && [key isKindOfClass:[NSString class]] && object && ![object isKindOfClass:[NSNull class]]) {
         [dict setValue:object forKey:key];
     } else {
         return;
@@ -154,15 +154,6 @@
         return object;
     } else {
         return nil;
-    }
-}
-
-+ (NSString *)getStringValueFromDictSafe:(NSDictionary *)dict key:(NSString *)key {
-    id object = [self valueForKeySafe:key dict:dict valueClass:[NSString class]];
-    if (object) {
-        return object;
-    } else {
-        return @"";
     }
 }
 

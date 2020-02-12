@@ -50,25 +50,20 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)replaceObjectAtIndexSafe:(NSUInteger)index withObject:(id)anObject array:(NSMutableArray *)array;
 
 /// 获取字典value的安全方法
-/// @param key 键,这是个变量，有可能为nil，null等其他类型
+/// @param key 键,系统的valueForKey方法，key传入nil和null不会崩溃，但传入其他非NSString就会崩溃
 /// @param dict 不可变字典，可变字典
 + (id)valueForKeySafe:(NSString *)key dict:(NSDictionary *)dict;
 
 /// 可变字典添加元素的安全方法
-/// @param object 值
-/// @param key 键,只可以为NSString类型
+/// @param object 值，系统方法value为nil和null不会崩溃
+/// @param key 键, key只可以为NSString类型，其他类型会崩溃
 + (void)setValueSafe:(id)object forKey:(NSString *)key dict:(NSMutableDictionary *)dict;
 
 /// 校验字典中取出的值是否符合指定的类型
-/// @param key 键
+/// @param key 键,为nil和null不会崩溃，但传入其他非NSString就会崩溃
 /// @param dict 字典
 /// @param valueClass 指定的类型
 + (id)valueForKeySafe:(NSString *)key dict:(NSDictionary *)dict valueClass:(Class)valueClass;
-
-/// 从字典中获取字符串类型的值
-/// @param dict 字典
-/// @param key 键
-+ (NSString *)getStringValueFromDictSafe:(NSDictionary *)dict key:(NSString *)key;
 
 @end
 
