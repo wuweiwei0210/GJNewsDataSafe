@@ -131,7 +131,7 @@
     XCTAssertTrue(result);
 }
 
-- (void)testGJNewsResponseData {
+- (void)testGJNewsResponseDataExample {
     NSDictionary *json = @{@"msg": @"success",
                            @"error": @"noError",
                            @"data": @{@"typeCode": @"9201",
@@ -174,7 +174,7 @@
     XCTAssertTrue(result);
 }
 
-- (void)testGJNewsResponseDataFail {
+- (void)testGJNewsResponseDataExampleFail {
     NSDictionary *json = @{@"msg": @"success",
                            @"error": @"noError",
                            @"data": @{@"typeCode": @"9201",
