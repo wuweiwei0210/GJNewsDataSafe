@@ -416,7 +416,7 @@
 
 #pragma mark - 测试从字典中获取指定类型的值
 
-- (void)testGetDesignativeClassValueFromDict1 {
+- (void)testGetDesignativeClassValueFromDictSuccess {
     NSDictionary *dict = @{@"key1":@"value1", @"key2":@"value2"};
     
     id key = @"key1";
@@ -426,12 +426,42 @@
     XCTAssertNotNil(result);
 }
 
-- (void)testGetDesignativeClassValueFromDict2 {
+- (void)testGetDesignativeClassValueFromDictFail{
     NSDictionary *dict = @{@"key1":@"value1", @"key2":@"value2"};
     
     id key = @"key1";
     
     id result = [GJNewsDataSafe valueForKeySafe:key dict:dict valueClass:[NSArray class]];
+    
+    XCTAssertNil(result);
+}
+
+- (void)testGetDesignativeClassValueFromMutDictSuccess {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"key1":@"value1", @"key2":@"value2"}];
+    
+    id key = @"key1";
+    
+    id result = [GJNewsDataSafe valueForKeySafe:key dict:dict valueClass:[NSString class]];
+    
+    XCTAssertNotNil(result);
+}
+
+- (void)testGetDesignativeClassValueFromMutDictFail1 {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"key1":@"value1", @"key2":@"value2"}];
+    
+    id key = @"key1";
+    
+    id result = [GJNewsDataSafe valueForKeySafe:key dict:dict valueClass:[NSArray class]];
+    
+    XCTAssertNil(result);
+}
+
+- (void)testGetDesignativeClassValueFromMutDictFail2 {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"key1":@"value1", @"key2":@"value2"}];
+    
+    id key = @1;
+    
+    id result = [GJNewsDataSafe valueForKeySafe:key dict:dict valueClass:[NSString class]];
     
     XCTAssertNil(result);
 }
@@ -440,36 +470,6 @@
     NSDictionary *dict = @{@"key1":@"value1", @"key2":@"value2"};
     
     id key = nil;
-    
-    id result = [GJNewsDataSafe valueForKeySafe:key dict:dict valueClass:[NSString class]];
-    
-    XCTAssertNil(result);
-}
-
-- (void)testGetDesignativeClassValueFromMutDict1 {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"key1":@"value1", @"key2":@"value2"}];
-    
-    id key = @"key1";
-    
-    id result = [GJNewsDataSafe valueForKeySafe:key dict:dict valueClass:[NSString class]];
-    
-    XCTAssertNotNil(result);
-}
-
-- (void)testGetDesignativeClassValueFromMutDict2 {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"key1":@"value1", @"key2":@"value2"}];
-    
-    id key = @"key1";
-    
-    id result = [GJNewsDataSafe valueForKeySafe:key dict:dict valueClass:[NSArray class]];
-    
-    XCTAssertNil(result);
-}
-
-- (void)testGetDesignativeClassValueFromMutDict3 {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"key1":@"value1", @"key2":@"value2"}];
-    
-    id key = @1;
     
     id result = [GJNewsDataSafe valueForKeySafe:key dict:dict valueClass:[NSString class]];
     
